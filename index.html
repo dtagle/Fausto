@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Invitación — Fausto {{year}}</title>
+
+    <!-- Tailwind CDN para utilidades rápidas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Meta sociales recomendadas -->
+    <meta name="description" content="Invitación al 8º cumpleaños de Fausto. ¡Ven disfrazado y acompáñanos en una celebración épica!">
+    <meta property="og:title" content="Invitación — Fausto 8 años">
+    <meta property="og:description" content="Invitación al 8º cumpleaños de Fausto. ¡Ven disfrazado y acompáñanos en una celebración épica!">
+    <meta property="og:image" content="https://cdn.shopify.com/s/files/1/0817/1657/6536/files/Anakin-and-obiwan_480x480.jpg">
+    <meta property="og:type" content="website">
+
+    <!-- Estilos locales -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Configuración editable (fecha, hora, lugar, correo RSVP) -->
+    <script src="config.js" defer></script>
+</head>
+<body class="bg-black text-white overflow-hidden">
+
+    <!-- Contenedor del botón de inicio (accesible) -->
+    <div id="play-button-container" class="fixed inset-0 z-50 flex items-center justify-center bg-black">
+        <button id="play-button"
+            aria-label="Iniciar invitación"
+            class="bg-yellow-400 text-black star-wars-font text-2xl px-8 py-4 rounded-lg shadow-lg hover:bg-yellow-300 transition-colors focus:outline-none focus:ring-4 focus:ring-yellow-300">
+            Iniciar Transmisión Rebelde
+        </button>
+    </div>
+
+    <!-- Contenedor principal de la animación (inicialmente oculto) -->
+    <div id="animation-container" class="hidden">
+        <div id="intro" class="sr-only">Hace mucho tiempo, en una galaxia muy, muy lejana...</div>
+
+        <div id="intro-visual" class="absolute inset-0 flex items-center justify-center">
+            <p class="text-cyan-300 text-3xl md:text-5xl font-bold star-wars-font text-center px-6" id="intro-text">
+                Hace mucho tiempo, en una galaxia muy, muy lejana....
+            </p>
+        </div>
+
+        <img id="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/1200px-Star_Wars_Logo.svg.png" alt="Star Wars Logo" class="mx-auto">
+
+        <div class="crawl-container">
+            <div class="crawl star-wars-font" id="crawl-content" aria-hidden="true">
+                <h1 id="episode">Episodio VIII</h1>
+                <h2 id="title">LA FIESTA DE FAUSTO</h2>
+                <p>¡La galaxia está de fiesta! El valiente Caballero Jedi, FAUSTO, está a punto de cumplir años y su conexión con la Fuerza es más poderosa que nunca.</p>
+                <p>Para celebrar esta gran victoria contra el lado oscuro del aburrimiento, el Consejo Jedi ha decretado una reunión de todos los jóvenes Padawans.</p>
+                <p>Tu presencia es crucial para ayudar a Fausto a completar su entrenamiento y traer equilibrio a la Fuerza. Se requiere tu habilidad con el sable de luz, tu destreza en el combate y, sobre todo, ¡tus ganas de divertirte!</p>
+                <p>Prepara tu mejor disfraz de tu personaje favorito y únete a esta misión... ¡La Resistencia te necesita!</p>
+            </div>
+        </div>
+
+        <div id="final-card" class="p-4 flex items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="final-title">
+            <div class="w-full max-w-lg text-center rounded-lg border-2 border-yellow-400 bg-black p-4 md:p-6">
+                <h2 id="final-title" class="star-wars-font text-3xl md:text-5xl text-yellow-400 mb-4">¡La Fuerza te llama!</h2>
+
+                <img id="profile-img" src="https://cdn.shopify.com/s/files/1/0817/1657/6536/files/Anakin-and-obiwan_480x480.jpg" alt="Foto de Fausto Jedi" class="w-36 h-36 md:w-64 md:h-64 rounded-full object-cover border-4 border-blue-500 shadow-lg shadow-blue-500/50 my-4 mx-auto">
+
+                <p id="invite-text" class="text-xl md:text-2xl font-bold mb-2">¡Acompaña a Fausto en su cumpleaños!</p>
+
+                <div class="text-base md:text-xl space-y-2 mt-4" id="event-details">
+                    <p><strong class="text-yellow-400">Cuándo:</strong> <span id="event-date">Domingo, 23 de Noviembre</span></p>
+                    <p><strong class="text-yellow-400">Hora:</strong> <span id="event-time">10:00 AM</span></p>
+                    <p><strong class="text-yellow-400">Dónde:</strong> <span id="event-place">Lumy Magic Fiestas Infantiles</span></p>
+                    <p class="text-sm md:text-lg" id="event-address">Calle Faisán 10, Granjas Moderna, 07460 Gustavo A. Madero, CDMX</p>
+                    <p class="mt-4 text-yellow-400 font-bold text-lg md:text-2xl">¡Puedes venir disfrazado!</p>
+                </div>
+
+                <div class="mt-6 flex flex-col md:flex-row items-center justify-center gap-3">
+                    <button id="rsvp-open" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded text-white">Confirmar asistencia</button>
+                    <button id="copy-link" class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded text-white">Copiar enlace</button>
+                    <button id="print-invite" class="bg-green-600 hover:bg-green-500 px-4 py-2 rounded text-white">Imprimir / Guardar PDF</button>
+                </div>
+
+                <p class="mt-6 text-sm md:text-base text-gray-400">¡Que la fiesta te acompañe!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal RSVP -->
+    <div id="rsvp-modal" class="fixed inset-0 z-60 hidden items-center justify-center bg-black/70 p-4">
+        <div class="bg-white text-black rounded-lg p-4 max-w-md w-full">
+            <h3 class="text-xl font-bold mb-2">Confirmar asistencia</h3>
+            <form id="rsvp-form" class="space-y-3">
+                <div>
+                    <label for="guest-name" class="block text-sm font-medium">Nombre</label>
+                    <input id="guest-name" name="name" type="text" required class="mt-1 block w-full rounded border px-2 py-1">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium">¿Asistirás?</label>
+                    <select id="guest-attend" name="attend" required class="mt-1 block w-full rounded border px-2 py-1">
+                        <option value="si">Sí</option>
+                        <option value="no">No</option>
+                        <option value="talvez">Tal vez</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="guest-msg" class="block text-sm font-medium">Mensaje (opcional)</label>
+                    <textarea id="guest-msg" name="message" rows="3" class="mt-1 block w-full rounded border px-2 py-1"></textarea>
+                </div>
+
+                <div class="flex items-center justify-end gap-2">
+                    <button type="button" id="rsvp-cancel" class="px-3 py-1 rounded bg-gray-200">Cancelar</button>
+                    <button type="submit" class="px-3 py-1 rounded bg-blue-600 text-white">Enviar RSVP</button>
+                </div>
+            </form>
+            <p class="text-sm text-gray-600 mt-3">Tu respuesta se guardará en tu navegador y se abrirá el cliente de correo para notificar al anfitrión (opcional). Puedes editar el correo antes de enviarlo.</p>
+        </div>
+    </div>
+
+    <!-- Librería de audio opcional -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
+
+    <!-- Lógica de la página -->
+    <script src="script.js" defer></script>
+</body>
+</html>
